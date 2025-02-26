@@ -459,44 +459,6 @@
 
 
 
-    <section class="news-section">
-        <h2>Latest News</h2>
-        <div class="news-container" id="news-container"></div>
-    </section>
-
-    <script>
-        async function fetchNews() {
-            try {
-                const response = await fetch('https://newsapi.org/v2/top-headlines?category=technology&language=en&apiKey=344b1092b98f49beb48e140f9920e304');
-                const data = await response.json();
-                const articles = data.articles.slice(0, 3); // Limit to 3 news articles
-
-                const newsContainer = document.getElementById("news-container");
-                newsContainer.innerHTML = "";
-
-                articles.forEach(article => {
-                    const newsCard = document.createElement("div");
-                    newsCard.classList.add("news-card");
-
-                    newsCard.innerHTML = `
-                        <img src="${article.urlToImage || 'https://via.placeholder.com/400x250.png?text=No+Image'}" alt="${article.title}">
-                        <div class="news-content">
-                            <p>${article.source.name} | ${new Date(article.publishedAt).toDateString()}</p>
-                            <h3 class="news-title">${article.title}</h3>
-                            <a href="${article.url}" target="_blank" class="read-more">Read more →</a>
-                        </div>
-                    `;
-
-                    newsContainer.appendChild(newsCard);
-                });
-            } catch (error) {
-                console.error("Error fetching news:", error);
-            }
-        }
-
-        fetchNews();
-    </script>
-
 
 
 
